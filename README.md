@@ -2,42 +2,35 @@
 
 ## Overview
 
-This repository contains the work done to integrate LDPC-based ECC into the L2 cache of the POLARA RISC-V SoC, including RTL integration, latency simulation, FPGA emulation, and performance benchmarks.
+This repository contains the integration of LDPC-based ECC into the L2 cache of the POLARA RISC-V SoC, including RTL integration, latency simulation, FPGA emulation, and performance benchmarks.
 
-The target ECC configuration is an LDPC(144, 128) code, protecting each 128-bit L2 cache data word with 16 parity bits.
+The target ECC configuration is an LDPC(144, 128) code, adding 16 parity bits to each 128-bit L2 cache data word.
 
 Related projects
-- core-v-polara-apu : https://github.com/allairemederic/core-v-polara-apu
-- GRM               : https://github.com/PolyMTL-Gr2m
-- Ara               : https://github.com/PolyMTL-Gr2m/ara
-- CVA6              : https://github.com/PolyMTL-Gr2m/cva6
-- OpenPiton         : https://github.com/PrincetonUniversity/openpiton
-
-## Architecture
-
-... not finalized
+- [core-v-polara-apu](https://github.com/allairemederic/core-v-polara-apu)
+- [GRM](https://github.com/PolyMTL-Gr2m)
+- [Ara](https://github.com/PolyMTL-Gr2m/ara)
+- [CVA6](https://github.com/PolyMTL-Gr2m/cva6)
+- [OpenPiton](https://github.com/PrincetonUniversity/openpiton)
 
 ## Project Components
 
-FPGA Emulation
-- Setup and modifications required to emulate POLARA on a Xilinx Alveo U280
-- Includes the FPGA build configuration, resource-related modifications, and hardware validation
+### FPGA Emulation
 
-Latency Simulation
-- Latency models used before integrating the complete LDPC decoder and encoder
-- Includes latency insertion at different locations in the L2 pipeline
-- Implementation supports backpressure to preserve the existing ready/valid behavior
+FPGA build configuration, resource-related modifications, and hardware validation for POLARA on a Xilinx Alveo U280.
 
-Benchmarks
-- Benchmarks used to validate the FPGA implementation and measure the performance impact of L2/ECC latency
-- Includes scripts to build, run, and collect benchmark results
-- Current benchmarks: matrix multiplication, 2D convolution
+### Latency Simulation
 
-ECC
-- RTL and integration work for the LDPC(144,128) ECC implementation
-- Includes a SystemVerilog LDPC encoder, encoder package generation and verification
-- Includes the LDPC decoder configuration and its integration in the L2 datapath
+Configurable latency models used to evaluate ECC overhead before full integration, with ready/valid backpressure support.
 
-Results
-- Contains the FPGA benchmark results for the different POLARA configurations evaluated in this project
-- Includes baseline reference, simulated latency (around the NoC and in the datapath) and LDPC ECC
+### Benchmarks
+
+FPGA benchmark flow for performance evaluation, including matrix multiplication and 2D convolution.
+
+### ECC
+
+LDPC(144,128) encoder/decoder RTL, generation and verification tools, and L2 cache integration.
+
+### Results
+
+Benchmark results comparing the baseline, simulated ECC latency, and integrated LDPC ECC configurations.

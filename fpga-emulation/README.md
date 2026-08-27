@@ -1,13 +1,11 @@
 # FPGA Emulation
 
-POLARA was emulated on a Xilinx Alveo U280 using a 2×2 tile configuration.
+POLARA was emulated on a Xilinx Alveo U280 using a 2×2 tile configuration. The FPGA flow was used to validate system boot, UART communication, DDR4 accesses, and the execution of integer benchmarks.
+
+For a detailed view of the 2×2 POLARA architecture, tile organization, and memory hierarchy, see [POLARA Architecture](polara-architecture.md).
+
 
 ## Build
-
-- Board: Xilinx Alveo U280
-- Core: CVA6/Ariane
-- Tiles: 2×2
-- ProtoSyn: v2.5
 
 Generate the image with:
 
@@ -15,7 +13,7 @@ Generate the image with:
 protosyn --board alveou280 --design system --core ariane --x_tiles 2 --y_tiles 2 --jobs 16 --define NO_FPU_SUPPORT
 ```
 
-Floating-point support is disabled to reduce resource utilization. See [no-fpu.md](no-fpu.md) for the required CVA6 and Ara modifications.
+Floating-point support is disabled to reduce resource utilization. See [FPU.md](FPU.md) for the required CVA6 and Ara modifications.
 
 ### Compilation Macros
 
@@ -24,9 +22,9 @@ These macros are used to configure the POLARA FPGA build:
 - SIMULATE_LDPC_LATENCY : enables artificial encoder and decoder latency in the L2 cache
 - USE_LDPC_ECC : Enables the LDPC-based ECC implementation in the L2 cache
 
-## Tests
+## Hardware Validation
 
-### UART Hello World
+### UART Boot Test
 
 [`uart_hello_world.c`](tests/uart_hello_world.c) verifies that POLARA boots correctly and that UART output is functional.
 
@@ -34,9 +32,9 @@ These macros are used to configure the POLARA FPGA build:
 ./tests/run_uart_test.sh tests/uart_hello_world.c
 ```
 
-### DDR Writing Test
+### DDR Access Test
 
-[`ddr_writing_test.c `](tests/ddr_writing_test.c )verifies DDR accesses by writing values from POLARA and reading them back from the host.
+[`ddr_writing_test.c `](tests/ddr_writing_test.c )writes test values to DDR4 from POLARA. The resulting memory contents are then read back from the host and compared with the expected values.
 
 ```bash
 ./tests/run_ddr_test.sh tests/ddr_writing_test.c

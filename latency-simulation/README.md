@@ -1,19 +1,45 @@
 # LDPC Latency Simulation
 
-RTL modules used to simulate LDPC encoder and decoder latency in the POLARA L2 cache. Enabled with `SIMULATE_LDPC_LATENCY`.
+RTL modules used to evaluate LDPC encoder and decoder latency in the POLARA L2 cache before integrating the complete LDPC implementation.
 
-Standalone testbenches verify data propagation and latency, ready/valid behavior, and backpressure handling.
+Enabled with the `SIMULATE_LDPC_LATENCY` compilation macro.
 
-## Components
+## L2 Cache Architecture
+
+Wrapper around the L2 data SRAM, showing its main read and write interfaces:
+
+![alt text](../docs/figures/l2-data-wrap.png)
+
+Simplified view of the read and write data paths through the first L2 pipeline:
+
+![alt text](../docs/figures/l2-pipe1.png)
+
+Simplified view of the write data path through the second L2 pipeline:
+
+![alt text](../docs/figures/l2-pipe2.png)
+
+## Delay Insertion
+
+Two latency models were evaluated.
+
+### Noc Interface
+
+![alt text](../docs/figures/noc-delay.png)
+
+### L2 Datapath
+
+![alt text](../docs/figures/dpath-delay.png)
+
+## RTL Components
 
 ### Encoder Simulator
 
-[`ldpc_encoder_simulator.sv`](ldpc_encoder_simulator.sv) is used to validate the encoder placement in the L2 pipeline while preserving the original data format.
+[`ldpc_encoder_simulator.sv`](ldpc_encoder_simulator.sv) validates the encoder placement and preserves the original 144-bit L2 data format.
 
-By default, the encoder is combinational. The `PIPELINE` parameter can enable a 1-cycle pipeline stage to evaluate the impact of encoder latency on the L2 datapath.
+By default, the encoder is combinational. The optional `PIPELINE` parameter adds one cycle of encoder latency.
 
 ### L2 Delay Buffer
 
 [`L2_delay_buffer.sv`](L2_delay_buffer.sv) introduces a configurable number of latency cycles while preserving the ready/valid handshake and propagating backpressure through the pipeline.
 
-It is primarily used to simulate the latency of the LDPC decoder before integrating the actual decoder RTL.
+For a detailed explanation of the ready/valid handshake and backpressure propagation, see [Backpressure Handling](backpressure.md).

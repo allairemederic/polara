@@ -22,6 +22,10 @@ Results are written to a dedicated DDR buffer and can also be decoded manually:
 python3 decode_ddr.py <output_file>
 ```
 
+The diagram below summarizes the benchmark flow, from compilation and DMA transfer to execution, cycle measurement, DDR4 result storage, and offline decoding:
+
+![alt text](../docs/figures/benchmark-flow.png)
+
 ## Integer Matrix Multiplication (imatmul)
 
 64-bit integer matrix multiplication (`int64_t`):

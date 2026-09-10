@@ -55,3 +55,13 @@ end
 ```
 
 The ECC implementation is selected inside `L2_ecc_encoder_wrapper`, allowing both datapaths to use the same interface without duplicating LDPC and SECDED selection logic.
+
+## RTL Source files
+
+In rtl_setup.tcl
+
+```systemverilog
+    "${DV_ROOT}/design/chip/tile/l2/rtl/ldpc_encoder_matrix_pkg.sv" \
+    "${DV_ROOT}/design/chip/tile/l2/rtl/ldpc_encoder.sv" \
+    "${DV_ROOT}/design/chip/tile/l2/rtl/L2_ecc_encoder_wrapper.sv" \
+```

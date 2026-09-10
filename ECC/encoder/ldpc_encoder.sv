@@ -10,9 +10,6 @@ module ldpc_encoder
 );
 
     // Import LDPC encoder matrix
-    // Generator matrix: G = [I_K | P]
-    // PARITY_MATRIX contains only P and is generated automatically by: generate_encoder_matrix_pkg.py
-    // For the (144,128) code: P = 128 x 16
     import ldpc_encoder_matrix_pkg::*;
 
     // Internal signals
@@ -27,12 +24,9 @@ module ldpc_encoder
 
         for (int col = 0; col < PARITY_BITS; col++) begin
 
-            parity[col] = 1'b0;
-
             for (int row = 0; row < K; row++) begin
                 
-                // message_i is MSB-first, so reverse the index (K-1-row) to match the row ordering of G
-                parity[col] ^= message_i[K-1-row] & PARITY_MATRIX[row][col];
+                parity[col] ^= message_i[row] & PARITY_MATRIX[row][col];
 
             end
 
@@ -41,8 +35,6 @@ module ldpc_encoder
     end
 
     // Systematic codeword
-    // G = [ I_K | P ]
-    // The information bits are preserved and the calculated parity bits complete the codeword
-    assign codeword_o = {message_i, parity};
+    assign codeword_o = {parity, message_i};
 
 endmodule

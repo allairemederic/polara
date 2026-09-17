@@ -1,13 +1,13 @@
 # NoC Delay Integration
 
-`L2_delay_buffer` module is inserted on both NoC interfaces of
-`l2_pipe1` to simulate additional latency:
-- **NoC1 → L2:** 1-cycle delay on incoming requests before `l2_pipe1_buf_in`
-- **L2 → NoC2:** 3-cycle delay on outgoing responses after `l2_pipe1_buf_out`
+`L2_delay_buffer` is inserted on both NoC interfaces of `l2_pipe1`:
 
-The buffers preserve the ready/valid handshake and propagate backpressure through the original interfaces, adding a total round-trip latency of **4 cycles**.
+- **NoC1 → L2:** 1-cycle delay before `l2_pipe1_buf_in`
+- **L2 → NoC2:** 3-cycle delay after `l2_pipe1_buf_out`
 
-The `L2_delay_buffer.sv` module must be added to the RTL source list defined by `CHIP_RTL_IMPL_FILES` in `rtl_setup.tcl`.
+Together, these buffers add four cycles to the request-response path while preserving ready/valid flow control and backpressure.
+
+`L2_delay_buffer.sv` must be added to `CHIP_RTL_IMPL_FILES` in `rtl_setup.tcl`..
 
 ## Intermediate signals
 

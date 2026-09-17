@@ -116,4 +116,82 @@ module L2_delay_buffer #(
     assign data_o  = data_pipe[DELAY-1];
     assign mode_o  = mode_pipe[DELAY-1];
 
+
+    //----------------------------------------------------------
+    // DEBUG COUNTERS
+    //----------------------------------------------------------
+
+`ifdef DEBUG_L2_DELAY_BUFFER
+
+    localparam int COUNTER_WIDTH = 64;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic [COUNTER_WIDTH-1:0] transaction_count;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic [COUNTER_WIDTH-1:0] input_stall_cycles;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic [COUNTER_WIDTH-1:0] output_stall_cycles;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic [COUNTER_WIDTH-1:0] measurement_cycles;
+
+    //----------------------------------------------------------
+    // HANDSHAKE SIGNALS FOR ILA VALIDATION
+    //----------------------------------------------------------
+
+    (* mark_debug = "true", keep = "true" *)
+    logic debug_valid_i;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic debug_ready_o;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic debug_valid_o;
+
+    (* mark_debug = "true", keep = "true" *)
+    logic debug_ready_i;
+
+    assign debug_valid_i = valid_i;
+    assign debug_ready_o = ready_o;
+    assign debug_valid_o = valid_o;
+    assign debug_ready_i = ready_i;
+
+    //----------------------------------------------------------
+    // COUNTER LOGIC
+    //----------------------------------------------------------
+
+    always_ff @(posedge clk_i or negedge rst_ni) begin
+        if (!rst_ni) begin
+            transaction_count   <= '0;
+            input_stall_cycles  <= '0;
+            output_stall_cycles <= '0;
+            measurement_cycles  <= '0;
+        end
+        else begin
+            // Nombre total de cycles depuis la fin du reset.
+            measurement_cycles <= measurement_cycles + 1'b1;
+
+            // Transaction acceptée à l'entrée du buffer.
+            if (valid_i && ready_o) begin
+                transaction_count <= transaction_count + 1'b1;
+            end
+
+            // Le module amont présente une transaction,
+            // mais le buffer ne peut pas l'accepter.
+            if (valid_i && !ready_o) begin
+                input_stall_cycles <= input_stall_cycles + 1'b1;
+            end
+
+            // Le buffer présente une transaction valide,
+            // mais le module aval ne peut pas l'accepter.
+            if (valid_o && !ready_i) begin
+                output_stall_cycles <= output_stall_cycles + 1'b1;
+            end
+        end
+    end
+
+`endif
+
 endmodule

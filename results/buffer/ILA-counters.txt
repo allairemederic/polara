@@ -1,0 +1,66 @@
+IMATMUL S=128
+
+Tile3
+Transactions count = 10714230
+Output stall = 917
+Input stall = 2
+
+Tile2
+Transactions count = 10717855
+Output stall = 1078
+Input stall = 53
+
+Tile1
+Transactions count = 10699956
+Output stall = 502
+Input stall = 0
+
+Tile0
+Transactions count = 10710957
+Output stall = 583
+Input stall = 10
+
+ICONV2D OUTPUT F=5 O=256
+
+Tile3
+Transactions count = 1984291
+Output stall = 64
+Input stall = 0
+
+Tile2
+Transactions count = 1989916
+Output stall = 96
+Input stall = 0
+
+Tile1
+Transactions count = 1990196
+Output stall = 0
+Input stall = 0
+
+Tile0
+Transactions count = 1990988
+Output stall = 0
+Input stall = 0
+
+ICONV2D IFMAP F=5 I=256
+
+Tile3
+Transactions count = 118172
+Output stall = 19
+Input stall = 1
+
+Tile2
+Transactions count = 118004
+Output stall = 5
+Input stall = 0
+
+Tile1
+Transactions count = 118099
+Output stall = 39
+Input stall = 0
+
+Tile0
+Transactions count = 117207
+Output stall = 8
+Input stall = 0
+

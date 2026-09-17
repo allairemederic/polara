@@ -1,29 +1,31 @@
 # LDPC ECC
 
-LDPC-based error correction for the POLARA L2 cache using an LDPC(144,128) code. Each 128-bit L2 data word is protected by 16 parity bits while preserving the existing 144-bit data-array width.
+This directory contains the LDPC-based protection developed for the POLARA L2 cache.
 
-### Components
+The selected code uses the following configuration:
 
-- **[Encoder](encoder/README.md):** generates a 144-bit codeword on both L2 write paths
-- **[Decoder](decoder/README.md):** restores the 128-bit data word on the L2 read path and supports ready/valid backpressure
+- Code length: 144 bits
+- Information bits: 128 bits
+- Parity bits: 16 bits
+- Code rate: 0.889
+- Decoder: Gallager-B
+- Decoding iterations: 3
+
+The code preserves the existing 144-bit L2 data-array width. Unlike the original implementation, which uses two independent SECDED blocks, the LDPC code protects the complete 128-bit data word.
 
 
-## Codeword Format
+## Components
 
-The baseline implementation stores two independent 64-bit SECDED blocks. The LDPC implementation instead protects the complete 128-bit data word with a single codeword.
+- [Encoder](encoder/README.md): generates the protected codeword on both L2 write paths
+- [Decoder](decoder/README.md): decodes the word on the pipe1 read path using a ready/valid interface
+- [Matrices](matrices/): contains the LDPC configuration, generator matrix, and parity-check matrix
+- [ECC Comparison](comparison-ldpc-secded/README.md): compares the recovery capability of the LDPC and SECDED implementations
 
-![alt text](../docs/figures/codeword-format.png)
+## Configuration Files
 
-## LDPC Configuration
+The `.gen` matrix is used to generate the SystemVerilog encoder package, while the `.cfg` and `.al` files configure the VHDL decoder. Both implementations therefore use the same LDPC(144,128) code.
 
-The [`matrices`](matrices/) directory contains the `.cfg`, `.gen` and `.al` files describing the selected LDPC code.
-
-![alt text](../docs/figures/matrix-gen.png)
-
-The `.gen` generator matrix is converted into a SystemVerilog parity-matrix package for the combinational encoder. The same `.cfg` configuration is used to generate the decoder, ensuring that both components implement the same LDPC(144,128) code.
-
-A valid 144-bit codeword `c` must satisfy the parity checks defined by matrix `H`:
+A valid codeword satisfies:
 
 ```text
 H × cᵀ = 0
-```

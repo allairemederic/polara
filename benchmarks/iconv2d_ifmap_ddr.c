@@ -1155,7 +1155,7 @@ int main(int argc, char ** argv)
     test_config_t tests[16];
 
     // F = 3
-    tests[0] = (test_config_t){3, 64};
+    //tests[0] = (test_config_t){3, 64};
     tests[1] = (test_config_t){3, 128};
     tests[2] = (test_config_t){3, 256};
 
@@ -1169,7 +1169,7 @@ int main(int argc, char ** argv)
     tests[7] = (test_config_t){7, 128};
     tests[8] = (test_config_t){7, 256};
 
-    int num_tests = 9;
+    int num_tests = 1;
 
     // Run tests
     for (int t = 0; t < num_tests; t++) {

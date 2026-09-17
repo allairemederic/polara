@@ -1,12 +1,12 @@
 # Disabling Floating-Point Support
 
-Floating-point support can be disabled during FPGA synthesis using the NO_FPU_SUPPORT compilation macro. This reduces FPGA resource utilization and was used for the 2×2 POLARA configuration on the Alveo U280..
+Floating-point support can be disabled during FPGA synthesis using the NO_FPU_SUPPORT compilation macro. This reduces FPGA resource utilization and was used for the 2×2 POLARA configuration on the Alveo U280.
 
 ## CVA6
 
-Modified file: ariane_pkg.sv
+Modified file: `ariane_pkg.sv`
 
-The RVF and RVD extensions are disabled when NO_FPU_SUPPORT is defined:
+The `RVF` and `RVD` extensions are disabled when NO_FPU_SUPPORT is defined:
 
 ```systemverilog
 `ifdef NO_FPU_SUPPORT
@@ -19,9 +19,9 @@ The RVF and RVD extensions are disabled when NO_FPU_SUPPORT is defined:
 
 ## Ara
 
-Modified file: ara_verilog_wrap.sv
+Modified file: `ara_verilog_wrap.sv`
 
-The FPUSupport parameter is set to FPUSupportNone when NO_FPU_SUPPORT is enabled:
+The `FPUSupport` parameter is set to `FPUSupportNone` when `NO_FPU_SUPPORT` is enabled:
 
 ```systemverilog
 `ifdef NO_FPU_SUPPORT

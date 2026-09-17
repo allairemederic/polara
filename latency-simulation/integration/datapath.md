@@ -1,16 +1,16 @@
 # Datapath Delay Integration
 
-The `SIMULATE_LDPC_LATENCY` configuration validates the future LDPC integration points without replacing the existing SECDED logic.
+The `SIMULATE_LDPC_LATENCY` configuration evaluates the future LDPC integration points while preserving the original SECDED protection.
 
-- `ldpc_encoder_simulator` reconstructs the 144-bit cache codeword in both datapaths
-- `L2_delay_buffer` adds a 4-cycle delay before `l2_pipe1_buf_out` to simulate the decoder
+- `ldpc_encoder_simulator` validates the encoder placement in both L2 write paths
+- `L2_delay_buffer` adds four cycles to the pipe1 response path to model decoder latency
 
+`L2_delay_buffer.sv` and `ldpc_encoder_simulator.sv` must be added to `CHIP_RTL_IMPL_FILES` in `rtl_setup.tcl`.
 
-The `L2_delay_buffer.sv` and `ldpc_encoder_simulator.sv` modules must be added to the RTL source list defined by `CHIP_RTL_IMPL_FILES` in `rtl_setup.tcl`.
 
 ## Decoder Latency
 
-In `l2_pipe1.v`, the delay buffer is inserted before `l2_pipe1_buf_out`:
+In `l2_pipe1.v`, the delay buffer is inserted before `l2_pipe1_buf_out. The response payload, header, and mode are delayed together to preserve their alignment.
 
 ```systemverilog
 `ifdef SIMULATE_LDPC_LATENCY
@@ -69,7 +69,7 @@ l2_pipe1_buf_out buf_out (
 
 ## Encoder Latency
 
-The encoder simulator is added to both datapaths without replacing the existing SECDED parity generators.
+The encoder simulator is inserted in both write paths without replacing the existing SECDED parity generators.
 
 ### `l2_pipe1_dpath.v`
 

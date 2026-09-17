@@ -1,46 +1,35 @@
 # LDPC Encoder
 
-The encoder converts each 128-bit L2 data word into a 144-bit LDPC codeword.
+The encoder converts each 128-bit L2 data word into a systematic 144-bit LDPC codeword containing 16 parity bits.
 
-## Encoder Wrapper
+## Implementation
 
-`L2_ecc_encoder_wrapper` selects the ECC implementation according to the `USE_LDPC_ECC` compilation macro.
+[`L2_ecc_encoder_wrapper.sv`](L2_ecc_encoder_wrapper.sv) selects the protection mechanism using `USE_LDPC_ECC`:
 
-When `USE_LDPC_ECC` is enabled, the wrapper uses the combinational `ldpc_encoder` module. Otherwise, it uses the original SECDED implementation.
+- `enabled`: combinational LDPC encoder;
+- `disabled`: original SECDED encoder.
 
-![alt text](../../docs/figures/encoder-wrapper.png)
-
-## LDPC Encoder
-
-`ldpc_encoder` computes the 16 parity bits defined by the generated LDPC matrix and appends them to the 128-bit input data.
-
-The implementation is fully combinational and does not add a pipeline cycle to the L2 write path.
-
-### Encoding Operation
-
-The encoder uses a systematic generator matrix:
+[`ldpc_encoder.sv`](ldpc_encoder.sv) computes the parity bits using the systematic generator matrix:
 
 ```text
-G = [I_K | P]
+G = [ P | I ]
 ```
-where `I_K` is the 128×128 identity matrix and `P` is the generated 128×16 parity matrix.
-
-All operations are performed in GF(2): addition is XOR and multiplication is AND.
-
-Each parity bit corresponds to one column of `P`:
-
-```text
-parity[j] = XOR(message[i] AND P[i][j])
+The resulting codeword is organized as:
+```textMessage    [143:16] 
+┌─────────────────┬────────────────────────────────────┐
+│ Parity   [15:0] │           Message    [143:16]      │
+└─────────────────┴────────────────────────────────────┘
 ```
+The encoder is fully combinational and adds no pipeline cycle to the L2 write paths.
 
-Because the code is systematic, the original message remains unchanged in the resulting codeword:
+## Matrix Generation
 
-```text
-┌───────────────────────────────┬─────────────────┐
-│ Message    [143:16]           │ Parity   [15:0] │
-└───────────────────────────────┴─────────────────┘
-```
+[`generate_encoder_matrix_pkg.py`](generator/generate_encoder_matrix_pkg.py) extracts the 128×16 parity matrix P from the generator matrix and produces `ldpc_encoder_matrix_pkg.sv`.
 
-The RTL implements the matrix multiplication as 16 combinational XOR networks. `PARITY_MATRIX` is constant at synthesis time, allowing the synthesis tool to remove unused connections and optimize the resulting logic.
+The generated matrix is constant at synthesis time and is implemented as parallel XOR logic.
 
-The reversed message index used in the RTL aligns the MSB-first `message_i` representation with the row ordering of the generated matrix.
+## Integration and Verification
+
+- [`L2 Datapath Integration`](integration/datapath-encoder.md)
+- [`tb_ldpc_encoder.sv`](verification/tb_ldpc_encoder.sv)
+- [`tb_L2_ecc_encoder_wrapper.sv`](verification/tb_L2_ecc_encoder_wrapper.sv)

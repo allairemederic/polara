@@ -1,33 +1,39 @@
 # Results
 
-FPGA benchmark results for the different POLARA configurations evaluated in this project.
+This directory contains the experimental results collected for the POLARA FPGA configurations evaluated in this project.
 
 ## Configurations
 
-### Baseline
+- **Baseline:** original SECDED protection without additional latency
+- **NoC delay:** one-cycle input delay and three-cycle output delay around pipe1
+- **Datapath delay:** four-cycle delay in the pipe1 read path
+- **LDPC ECC:** combinational encoders and pipelined Gallager-B decoder
 
-Reference POLARA configuration without ECC or additional latency.
+## Result Categories
 
-### Simulated latency
+### Benchmark Cycles
 
-Artificial encoder/decoder latency used to estimate the performance impact of ECC integration.
+[`cycles/`](cycles/) contains the raw execution-cycle measurements for `imatmul` and `iconv2d`.
 
-Configurations:
-- NoC: 1-cycle encoder before the L2 pipe1 input bufer and 3-cycle decoder after its output buffer
-- L2 datapath (combinational encoder): encoders in pipe1 and pipe2, with a 4-cycle decoder in pipe1
-- L2 datapath (1-cycle encoder): 1-cycle encoders in pipe1 and pipe2, with a 4-cycle decoder in pipe1
+[`analyze_results.py`](analyze_results.py):
 
-### LDPC ECC
+1. removes results where `verify != 0` or `cycles == 0`;
+2. removes outliers using the IQR method;
+3. computes the median, mean, and standard deviation;
+4. generates comparison tables and figures.
 
-LDPC ECC integrated into the L2 datapath:
-- Combinational LDPC encoders in pipe1 and pipe2
-- Pipelined LDPC decoder in the pipe1 read path
+### Buffer Activity
 
-## Analysis
+[`buffer/`](buffer/) contains the ILA counter values collected from `L2_delay_buffer`:
 
-The analyze_results.py script automatically:
-1. Removes invalid results (verify != 0 or cycles == 0)
-2. Removes outliers using the IQR method
-3. Computes median, mean, and standard deviation
-4. Generates summary and baseline-comparison tables
-5. Generates comparison graphs
+- accepted transactions;
+- input stall cycles;
+- output stall cycles.
+
+### Logic Utilization
+
+[`logic-utilization/`](logic-utilization/) contains the post-implementation LUT, FF, BRAM, and DSP utilization reported by Vivado.
+
+### Error-Correction Performance
+
+[`BER/`](BER/) contains the residual BER values used to compare the SECDED and LDPC protections.

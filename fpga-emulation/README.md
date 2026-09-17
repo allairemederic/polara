@@ -2,15 +2,12 @@
 
 POLARA was emulated on a Xilinx Alveo U280 using a 2×2 tile configuration. The FPGA flow was used to validate system boot, UART communication, DDR4 accesses, and the execution of integer benchmarks.
 
-For a detailed view of the 2×2 POLARA architecture, tile organization, and memory hierarchy, see [POLARA Architecture](polara-architecture.md).
-
-
 ## Build
 
-Generate the image with:
+Generate the reference image with:
 
 ```bash
-protosyn --board alveou280 --design system --core ariane --x_tiles 2 --y_tiles 2 --jobs 16 --define NO_FPU_SUPPORT
+protosyn --board alveou280 --design system --core ariane --x_tiles 2 --y_tiles 2 --jobs 16 --defines NO_FPU_SUPPORT
 ```
 
 Floating-point support is disabled to reduce resource utilization. See [FPU.md](FPU.md) for the required CVA6 and Ara modifications.
@@ -18,9 +15,10 @@ Floating-point support is disabled to reduce resource utilization. See [FPU.md](
 ### Compilation Macros
 
 These macros are used to configure the POLARA FPGA build:
-- NO_FPU_SUPPORT : disables floating-point support
-- SIMULATE_LDPC_LATENCY : enables artificial encoder and decoder latency in the L2 cache
-- USE_LDPC_ECC : Enables the LDPC-based ECC implementation in the L2 cache
+- `NO_FPU_SUPPORT` : disables floating-point support
+- `SIMULATE_LDPC_LATENCY` : enables artificial encoder and decoder latency in the L2 cache
+- `USE_LDPC_ECC` : Enables the LDPC-based ECC implementation in the L2 cache
+- `DEBUG_L2_DELAY_BUFFER`: enables transaction and stall counters for ILA debugging
 
 ## Hardware Validation
 

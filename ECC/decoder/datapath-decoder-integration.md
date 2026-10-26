@@ -144,7 +144,7 @@ wire [127:0] ldpc_output_data_S4;
 
 L2_ecc_decoder_wrapper ldpc_decoder (
     .clk        (clk),
-    .rst_ni     (rst_n),
+    .rst_n     (rst_n),
     .valid_i    (valid_S4),
     .ready_o    (ldpc_input_ready_S4),
     .codeword_i (data_data_trans_S4),

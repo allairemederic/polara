@@ -34,7 +34,12 @@ module ldpc_encoder
 
     end
 
-    // Systematic codeword
-    assign codeword_o = {parity, message_i};
+    // Keep the data bits unchanged
+    assign codeword_o[K-1:0] = message_i;
+
+    // Match the decoder parity-bit order.
+    for (genvar j = 0; j < PARITY_BITS; j++) begin : parity_order
+        assign codeword_o[K+j] = parity[PARITY_BITS-1-j];
+    end
 
 endmodule

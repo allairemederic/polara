@@ -23,3 +23,37 @@ See [L2 datapath integration](datapath-decoder-integration.md).
 
 - `top_tb.vhd`: verifies nominal decoding
 - `top_stall_test_tb.vhd`: verifies output stability and backpressure
+
+To test the wrapper with the mock top : 
+
+- setenv SYN_HOME "/CMC/tools/synopsys/vcs_vT-2022.06-SP2/vcs/T-2022.06-SP2/"
+- source /CMC/scripts/synopsys.vcs_verdi.2022.06-SP2.csh
+- vcs -sverilog top_mock.sv L2_ecc_decoder_wrapper.sv tb_L2_ecc_decoder_wrapper.sv -top tb_L2_ecc_decoder_wrapper -o simv_ldpc_control
+- ./simv_ldpc_control
+
+To test the wrapper with the real top decoder : 
+
+- setenv SYN_HOME "/CMC/tools/synopsys/vcs_vT-2022.06-SP2/vcs/T-2022.06-SP2/"
+- source /CMC/scripts/synopsys.vcs_verdi.2022.06-SP2.csh
+- setenv LDPC_HDL "/export/tmp/allaire/polara/core-v-polara-apu/ldpc_integration/gallager-b/hw/hdl"
+- vhdlan -full64 \
+    $LDPC_HDL/config_pkg.vhd  \
+    $LDPC_HDL/utils_pkg.vhd \
+    $LDPC_HDL/pipelineRegister.vhd \
+    $LDPC_HDL/variableNodeUnit.vhd \
+    $LDPC_HDL/checkNodeUnit.vhd \
+    $LDPC_HDL/controlFlipFlop.vhd \
+    $LDPC_HDL/info_fifo.vhd \
+    $LDPC_HDL/pipelineBank_core.vhd \
+    $LDPC_HDL/tannerGraphProcessor.vhd \
+    $LDPC_HDL/GallagerB_core.vhd \
+    $LDPC_HDL/top.vhd
+- vcs -full64 -sverilog \
+    -timescale=1ns/1ps \
+    -debug_access+all \
+    ../L2_ecc_decoder_wrapper.sv \
+    tb_L2_ecc_decoder_wrapper.sv \
+    -top tb_L2_ecc_decoder_wrapper \
+    -o simv_ldpc_real
+- ./simv_ldpc_real
+

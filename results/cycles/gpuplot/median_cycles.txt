@@ -1,0 +1,231 @@
+imatmul
+=======
+
+S=4
+DELAY=0: 663.5 cycles
+DELAY=1: 665 cycles
+DELAY=2: 659.5 cycles
+DELAY=3: 711.5 cycles
+DELAY=4: 694 cycles
+DELAY=6: 803 cycles
+DELAY=8: 805 cycles
+LDPC: 660 cycles
+
+S=8
+DELAY=0: 1870 cycles
+DELAY=1: 1870 cycles
+DELAY=2: 2006 cycles
+DELAY=3: 2029.5 cycles
+DELAY=4: 2123 cycles
+DELAY=6: 2267.5 cycles
+DELAY=8: 2426 cycles
+LDPC: 1956 cycles
+
+S=16
+DELAY=0: 9946.5 cycles
+DELAY=1: 10272.5 cycles
+DELAY=2: 10666.8 cycles (interpolé)
+DELAY=3: 11061 cycles
+DELAY=4: 11432 cycles
+DELAY=6: 12273 cycles
+DELAY=8: 13090 cycles
+LDPC: 10423 cycles
+
+S=32
+DELAY=0: 58593 cycles
+DELAY=1: 62143 cycles
+DELAY=2: 64485 cycles (interpolé)
+DELAY=3: 66827 cycles
+DELAY=4: 69016 cycles
+DELAY=6: 75553 cycles
+DELAY=8: 79832 cycles
+LDPC: 61752 cycles
+
+S=64
+DELAY=0: 392154.5 cycles
+DELAY=1: 410382 cycles
+DELAY=2: 428028 cycles (interpolé)
+DELAY=3: 445674 cycles
+DELAY=4: 464315.5 cycles
+DELAY=6: 501439 cycles
+DELAY=8: 537292 cycles
+LDPC: 410266 cycles
+
+S=128
+DELAY=0: 3351646 cycles
+DELAY=1: 3491743.5 cycles
+DELAY=2: 3631700.2 cycles (interpolé)
+DELAY=3: 3771657 cycles
+DELAY=4: 3911476.5 cycles
+DELAY=6: 4191573 cycles
+DELAY=8: 4477501 cycles
+LDPC: 3534973 cycles
+
+
+iconv2d-output
+==============
+
+F=3, OUTPUT=64
+DELAY=0: 96572.5 cycles
+DELAY=1: 100629 cycles
+DELAY=2: 105097 cycles
+DELAY=3: 109395.5 cycles
+DELAY=4: 113487 cycles
+DELAY=6: 122097.5 cycles
+DELAY=8: 130288 cycles
+LDPC: 101339.5 cycles
+
+F=3, OUTPUT=128
+DELAY=0: 378419 cycles
+DELAY=1: 393599 cycles
+DELAY=2: 412621 cycles
+DELAY=3: 427239 cycles
+DELAY=4: 442925 cycles
+DELAY=6: 475484 cycles
+DELAY=8: 506075 cycles
+LDPC: 395453 cycles
+
+F=3, OUTPUT=256
+DELAY=0: 1333199 cycles
+DELAY=1: mesure absente
+DELAY=2: 1392657 cycles
+DELAY=3: mesure absente
+DELAY=4: 1448697.5 cycles
+DELAY=6: mesure absente
+DELAY=8: mesure absente
+LDPC: mesure absente
+
+F=5, OUTPUT=64
+DELAY=0: 140682.5 cycles
+DELAY=1: 143055 cycles
+DELAY=2: 149240 cycles
+DELAY=3: 153822 cycles
+DELAY=4: 158077 cycles
+DELAY=6: 164854.5 cycles
+DELAY=8: 175278 cycles
+LDPC: 143458 cycles
+
+F=5, OUTPUT=128
+DELAY=0: 531454 cycles
+DELAY=1: 547014 cycles
+DELAY=2: 563331 cycles
+DELAY=3: 581203 cycles
+DELAY=4: 597023 cycles
+DELAY=6: 633002 cycles
+DELAY=8: 665673 cycles
+LDPC: 549221 cycles
+
+F=5, OUTPUT=256
+DELAY=0: 1656117.5 cycles
+DELAY=1: 1681565 cycles
+DELAY=2: 1710340 cycles
+DELAY=3: 1740138.5 cycles
+DELAY=4: 1765303 cycles
+DELAY=6: 1831256 cycles
+DELAY=8: 1907076.5 cycles
+LDPC: 1755221 cycles
+
+F=7, OUTPUT=64
+DELAY=0: 139244 cycles
+DELAY=1: 143297 cycles
+DELAY=2: 147525 cycles
+DELAY=3: 152234 cycles
+DELAY=4: 156664 cycles
+DELAY=6: 165065.5 cycles
+DELAY=8: 173738.5 cycles
+LDPC: 143363 cycles
+
+F=7, OUTPUT=128
+DELAY=0: 753779 cycles
+DELAY=1: 787695 cycles
+DELAY=2: 803351 cycles
+DELAY=3: 822383 cycles
+DELAY=4: 840699 cycles
+DELAY=6: 888435.5 cycles
+DELAY=8: 914907 cycles
+LDPC: 787938 cycles
+
+
+iconv2d-ifmap
+=============
+
+F=3, IFMAP=64
+DELAY=0: 94787.5 cycles
+DELAY=1: 98459 cycles
+DELAY=2: 102859 cycles
+DELAY=3: 106664 cycles
+DELAY=4: 110980 cycles
+DELAY=6: 119041 cycles
+DELAY=8: 127144.5 cycles
+LDPC: 99173.5 cycles
+
+F=3, IFMAP=128
+DELAY=0: 572772 cycles
+DELAY=1: 592794 cycles
+DELAY=2: 616532.5 cycles
+DELAY=3: 630170 cycles
+DELAY=4: 657902.5 cycles
+DELAY=6: 697344 cycles
+DELAY=8: 732246.5 cycles
+LDPC: 607634.5 cycles
+
+F=3, IFMAP=256
+DELAY=0: 1304777 cycles
+DELAY=1: mesure absente
+DELAY=2: mesure absente
+DELAY=3: mesure absente
+DELAY=4: 1424028 cycles
+DELAY=6: mesure absente
+DELAY=8: mesure absente
+LDPC: mesure absente
+
+F=5, IFMAP=64
+DELAY=0: 125291.5 cycles
+DELAY=1: 128822 cycles
+DELAY=2: 131177 cycles
+DELAY=3: 134555 cycles
+DELAY=4: 139850.5 cycles
+DELAY=6: 145576.5 cycles
+DELAY=8: 154120 cycles
+LDPC: 126660 cycles
+
+F=5, IFMAP=128
+DELAY=0: 497807 cycles
+DELAY=1: 511943 cycles
+DELAY=2: 527846 cycles
+DELAY=3: 542987 cycles
+DELAY=4: 558298 cycles
+DELAY=6: 590792.5 cycles
+DELAY=8: 621197 cycles
+LDPC: 515350.5 cycles
+
+F=5, IFMAP=256
+DELAY=0: 1608630 cycles
+DELAY=1: 1633801 cycles
+DELAY=2: 1667102.5 cycles
+DELAY=3: 1709122 cycles
+DELAY=4: 1741496 cycles
+DELAY=6: 1784392 cycles
+DELAY=8: 1908454 cycles
+LDPC: 1694623 cycles
+
+F=7, IFMAP=64
+DELAY=0: 124988.5 cycles
+DELAY=1: 128110 cycles
+DELAY=2: 132070 cycles
+DELAY=3: 135750 cycles
+DELAY=4: 139465 cycles
+DELAY=6: 147336.5 cycles
+DELAY=8: 153829.5 cycles
+LDPC: 128975.5 cycles
+
+F=7, IFMAP=128
+DELAY=0: 674791 cycles
+DELAY=1: 698432 cycles
+DELAY=2: 722354 cycles
+DELAY=3: 731994.5 cycles
+DELAY=4: 756742 cycles
+DELAY=6: 791993 cycles
+DELAY=8: 823979.5 cycles
+LDPC: 705333 cycles
+

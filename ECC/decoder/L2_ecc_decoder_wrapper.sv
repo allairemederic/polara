@@ -13,6 +13,9 @@ module L2_ecc_decoder_wrapper (
     input  wire         ready_i
 );
 
+    // The POLARA reset is active-low, while the VHDL decoder reset is active-high
+    wire ldpc_reset;
+
     // Prevents repeated submission of a stalled S4 transaction
     reg request_inflight_f;
 
@@ -24,6 +27,8 @@ module L2_ecc_decoder_wrapper (
 
     wire input_fire;
     wire output_fire;
+
+    assign ldpc_reset = ~rst_n;
 
     // Accept a request only when none is in flight
     assign core_input_valid = valid_i && !request_inflight_f;
@@ -65,7 +70,9 @@ module L2_ecc_decoder_wrapper (
     // Gallager-B decoder
     top ldpc_core (
         .I_clock         (clk),
-        .I_async_nrst    (rst_n),
+
+        // Input is active-high because of PKG_ASYNC_RESET_LOGIC
+        .I_async_nrst    (ldpc_reset),
 
         .I_input_valid   (core_input_valid),
         .I_output_ready  (core_output_ready),

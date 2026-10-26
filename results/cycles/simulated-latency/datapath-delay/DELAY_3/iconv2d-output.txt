@@ -1,0 +1,83 @@
+F=3 OUTPUT=64
+  iter  0: cycles=      108683 verify=0
+  iter  1: cycles=      109270 verify=0
+  iter  2: cycles=      109100 verify=0
+  iter  3: cycles=      109521 verify=0
+  iter  4: cycles=      109918 verify=0
+  iter  5: cycles=      110267 verify=0
+  iter  6: cycles=      109247 verify=0
+  iter  7: cycles=      110263 verify=0
+  iter  8: cycles=      108842 verify=0
+  iter  9: cycles=      110634 verify=0
+
+F=3 OUTPUT=128
+  iter  0: cycles=      511809 verify=126
+  iter  1: cycles=      426960 verify=0
+  iter  2: cycles=      428116 verify=0
+  iter  3: cycles=      429288 verify=0
+  iter  4: cycles=      426145 verify=0
+  iter  5: cycles=      427529 verify=0
+  iter  6: cycles=      424925 verify=0
+  iter  7: cycles=      430925 verify=0
+  iter  8: cycles=      425589 verify=0
+  iter  9: cycles=      427239 verify=126
+
+F=5 OUTPUT=64
+  iter  0: cycles=      149741 verify=0
+  iter  1: cycles=      152393 verify=0
+  iter  2: cycles=      153873 verify=0
+  iter  3: cycles=      153600 verify=0
+  iter  4: cycles=      153965 verify=0
+  iter  5: cycles=      153822 verify=0
+  iter  6: cycles=      153420 verify=0
+  iter  7: cycles=      154283 verify=0
+  iter  8: cycles=      154855 verify=0
+  iter  9: cycles=      151351 verify=0
+
+F=5 OUTPUT=128
+  iter  0: cycles=      717617 verify=0
+  iter  1: cycles=      581926 verify=0
+  iter  2: cycles=      583148 verify=0
+  iter  3: cycles=      580602 verify=0
+  iter  4: cycles=      578246 verify=0
+  iter  5: cycles=      579682 verify=0
+  iter  6: cycles=      581008 verify=0
+  iter  7: cycles=      581280 verify=0
+  iter  8: cycles=      581203 verify=0
+  iter  9: cycles=      583824 verify=0
+
+F=5 OUTPUT=256
+  iter  0: cycles=     1739411 verify=0
+  iter  1: cycles=     1747767 verify=0
+  iter  2: cycles=     1739578 verify=0
+  iter  3: cycles=     1747842 verify=0
+  iter  4: cycles=     1739578 verify=0
+  iter  5: cycles=     1739010 verify=0
+  iter  6: cycles=     1740465 verify=0
+  iter  7: cycles=     1747843 verify=0
+  iter  8: cycles=     1741822 verify=0
+  iter  9: cycles=     1739812 verify=0
+
+F=7 OUTPUT=64
+  iter  0: cycles=      153406 verify=0
+  iter  1: cycles=      152559 verify=0
+  iter  2: cycles=      151966 verify=0
+  iter  3: cycles=      152118 verify=0
+  iter  4: cycles=      150975 verify=0
+  iter  5: cycles=      152234 verify=0
+  iter  6: cycles=      152364 verify=0
+  iter  7: cycles=      152110 verify=0
+  iter  8: cycles=      151372 verify=0
+  iter  9: cycles=      152340 verify=0
+
+F=7 OUTPUT=128
+  iter  0: cycles=      754486 verify=0
+  iter  1: cycles=      843469 verify=0
+  iter  2: cycles=      842449 verify=0
+  iter  3: cycles=      818979 verify=0
+  iter  4: cycles=      821769 verify=0
+  iter  5: cycles=      823428 verify=0
+  iter  6: cycles=      805287 verify=0
+  iter  7: cycles=      806497 verify=0
+  iter  8: cycles=      822997 verify=0
+  iter  9: cycles=           0 verify=0

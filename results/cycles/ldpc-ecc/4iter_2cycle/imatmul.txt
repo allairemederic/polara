@@ -1,0 +1,96 @@
+S=  4  cycles=      1564  verify=0
+S=  4  cycles=       781  verify=0
+S=  4  cycles=       768  verify=0
+S=  4  cycles=       661  verify=0
+S=  4  cycles=       645  verify=0
+S=  4  cycles=       714  verify=0
+S=  4  cycles=       731  verify=0
+S=  4  cycles=       861  verify=0
+S=  4  cycles=       772  verify=0
+S=  4  cycles=       648  verify=0
+S=  4  cycles=       728  verify=0
+S=  4  cycles=       680  verify=0
+S=  4  cycles=       700  verify=0
+S=  4  cycles=       726  verify=0
+S=  4  cycles=       709  verify=0
+S=  4  cycles=       726  verify=0
+S=  8  cycles=      2235  verify=0
+S=  8  cycles=      2118  verify=0
+S=  8  cycles=      1787  verify=0
+S=  8  cycles=      1762  verify=0
+S=  8  cycles=      2042  verify=0
+S=  8  cycles=      1796  verify=0
+S=  8  cycles=      1810  verify=0
+S=  8  cycles=      2092  verify=0
+S=  8  cycles=      2068  verify=0
+S=  8  cycles=      1866  verify=0
+S=  8  cycles=      2090  verify=0
+S=  8  cycles=      1857  verify=0
+S=  8  cycles=      1979  verify=0
+S=  8  cycles=      2062  verify=0
+S=  8  cycles=      1950  verify=0
+S=  8  cycles=      2001  verify=0
+S= 16  cycles=     10768  verify=0
+S= 16  cycles=     11084  verify=0
+S= 16  cycles=     10831  verify=0
+S= 16  cycles=     11337  verify=0
+S= 16  cycles=     11316  verify=0
+S= 16  cycles=     12058  verify=0
+S= 16  cycles=     10839  verify=0
+S= 16  cycles=     10812  verify=0
+S= 16  cycles=     10997  verify=0
+S= 16  cycles=     11013  verify=0
+S= 16  cycles=     10813  verify=0
+S= 16  cycles=     11243  verify=0
+S= 16  cycles=     11034  verify=0
+S= 16  cycles=     11063  verify=0
+S= 16  cycles=     10974  verify=0
+S= 16  cycles=     10743  verify=0
+S= 32  cycles=     63885  verify=0
+S= 32  cycles=     64934  verify=0
+S= 32  cycles=     64664  verify=0
+S= 32  cycles=     63683  verify=0
+S= 32  cycles=     64525  verify=0
+S= 32  cycles=     64169  verify=0
+S= 32  cycles=     65413  verify=0
+S= 32  cycles=     65570  verify=0
+S= 32  cycles=     64479  verify=0
+S= 32  cycles=     65871  verify=0
+S= 32  cycles=     65081  verify=0
+S= 32  cycles=     65395  verify=0
+S= 32  cycles=     64863  verify=0
+S= 32  cycles=     65477  verify=0
+S= 32  cycles=     64698  verify=0
+S= 32  cycles=     64301  verify=0
+S= 64  cycles=    429038  verify=0
+S= 64  cycles=    427731  verify=0
+S= 64  cycles=    428210  verify=0
+S= 64  cycles=    428317  verify=0
+S= 64  cycles=    427417  verify=0
+S= 64  cycles=    428957  verify=0
+S= 64  cycles=    429864  verify=0
+S= 64  cycles=    427848  verify=0
+S= 64  cycles=    428830  verify=0
+S= 64  cycles=    427108  verify=0
+S= 64  cycles=    428534  verify=0
+S= 64  cycles=    427639  verify=0
+S= 64  cycles=    427757  verify=0
+S= 64  cycles=    428853  verify=0
+S= 64  cycles=    427626  verify=0
+S= 64  cycles=    428529  verify=0
+S=128  cycles=   3506663  verify=0
+S=128  cycles=   3636450  verify=0
+S=128  cycles=   3672120  verify=0
+S=128  cycles=   3681872  verify=0
+S=128  cycles=   3680189  verify=0
+S=128  cycles=   3684181  verify=0
+S=128  cycles=   3679536  verify=0
+S=128  cycles=   3691412  verify=0
+S=128  cycles=   3688026  verify=0
+S=128  cycles=   3687029  verify=0
+S=128  cycles=   3674093  verify=0
+S=128  cycles=   3681782  verify=0
+S=128  cycles=   3671262  verify=0
+S=128  cycles=   3693055  verify=0
+S=128  cycles=   3673724  verify=0
+S=128  cycles=   3689242  verify=0

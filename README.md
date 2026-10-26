@@ -1,4 +1,4 @@
-# Exploration and Evaluation of LDPC Protection for the POLARA RISC-V SoC L2 Cache
+# Evaluating LDPC Protection for the Last-Level Cache of a RISC-V Vector Processor
 
 ## Overview
 

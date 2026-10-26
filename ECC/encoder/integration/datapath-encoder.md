@@ -22,16 +22,96 @@ always @ *
 begin
     if (special_addr_type_S2)
     begin
+`ifdef USE_LDPC_ECC
+        // LDPC format : 16 bits of redundancy, 128 bits of data
+        data_data_in_S2 = {
+            msg_data_S2[7:0],
+            msg_data_S2[7:0],
+            msg_data_S2,
+            msg_data_S2
+        };
+`else
+        // SECDED format : two 72 bits bocks.
         data_data_in_S2 = {
             msg_data_S2[`L2_DATA_ECC_PARITY_WIDTH-1:0],
             msg_data_S2,
             msg_data_S2[`L2_DATA_ECC_PARITY_WIDTH-1:0],
             msg_data_S2
         };
+`endif
     end
     else
     begin
         data_data_in_S2 = ecc_codeword_S2;
+    end
+end
+```
+
+We also need to adapt the data_data_mask_in_S2 for the data block:
+
+```systemverilog
+always @ *
+begin
+    if (special_addr_type_S2)
+    begin
+`ifdef USE_LDPC_ECC
+        if (addr_S2_f[`L2_ADDR_OP] == {`L2_ADDR_OP_WIDTH{1'b0}})
+        begin
+            // Access to half of data word (64 bits)
+            data_data_mask_in_S2 = {80'b0, {64{1'b1}}};
+            data_data_mask_in_S2 = data_data_mask_in_S2 << (64 * addr_S2_f[3]);
+        end
+        else
+        begin
+            // Access to half of redundancy (8 bits)
+            data_data_mask_in_S2 = {8'b0, {8{1'b1}}, 128'b0};
+            data_data_mask_in_S2 = data_data_mask_in_S2 << (8 * addr_S2_f[3]);
+        end
+`else
+        if (addr_S2_f[`L2_ADDR_OP] == {`L2_ADDR_OP_WIDTH{1'b0}})
+        begin
+            data_data_mask_in_S2 =
+                {{(`L2_DATA_ARRAY_WIDTH-`L2_DATA_ECC_TOTAL_WIDTH){1'b0}},
+                 {`L2_DATA_ECC_PARITY_WIDTH{1'b0}},
+                 {`L2_DATA_ECC_DATA_WIDTH{1'b1}}};
+        end
+        else
+        begin
+            data_data_mask_in_S2 =
+                {{(`L2_DATA_ARRAY_WIDTH-`L2_DATA_ECC_TOTAL_WIDTH){1'b0}},
+                 {`L2_DATA_ECC_PARITY_WIDTH{1'b1}},
+                 {`L2_DATA_ECC_DATA_WIDTH{1'b0}}};
+        end
+
+        data_data_mask_in_S2 =
+            data_data_mask_in_S2
+            << (`L2_DATA_ECC_TOTAL_WIDTH * addr_S2_f[3]);
+`endif
+    end
+    else
+    begin
+`ifdef USE_LDPC_ECC
+        // Normal LDPC writing
+        data_data_mask_in_S2 = {`L2_DATA_ARRAY_WIDTH{1'b1}};
+`else
+        if (data_size_S2 == `MSG_DATA_SIZE_1B ||
+            data_size_S2 == `MSG_DATA_SIZE_2B ||
+            data_size_S2 == `MSG_DATA_SIZE_4B ||
+            data_size_S2 == `MSG_DATA_SIZE_8B)
+        begin
+            data_data_mask_in_S2 =
+                {{(`L2_DATA_ARRAY_WIDTH-`L2_DATA_ECC_TOTAL_WIDTH){1'b0}},
+                 {`L2_DATA_ECC_TOTAL_WIDTH{1'b1}}};
+
+            data_data_mask_in_S2 =
+                data_data_mask_in_S2
+                << (`L2_DATA_ECC_TOTAL_WIDTH * addr_S2_f[3]);
+        end
+        else
+        begin
+            data_data_mask_in_S2 = {`L2_DATA_ARRAY_WIDTH{1'b1}};
+        end
+`endif
     end
 end
 ```
